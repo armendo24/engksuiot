@@ -29,8 +29,11 @@
             ],
             "styles": [
               "src/styles.scss"
+
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/wowjs/dist/wow.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -103,5 +106,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "5727c5ef-aaca-4d6a-8f32-0bbe740b3311"
   }
 }

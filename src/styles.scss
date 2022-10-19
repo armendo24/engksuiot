@@ -1,1 +1,123 @@
-/* You can add global styles to this file, and also import other style files */
+@use "@angular/material" as mat;
+@include mat.core();
+@import "bootstrap/scss/bootstrap";
+@import 'animate.css';
+@import "~animate.css/animate.css";
+$primary-color : mat.get-color-from-palette(mat.$red-palette, 900);
+$primary-text : white;
+
+$accent-color : mat.get-color-from-palette(mat.$blue-gray-palette, 800);
+$accent-text : white;
+
+$t-primary: mat.define-palette(mat.$red-palette, 900);
+$t-accent: mat.define-palette(mat.$blue-gray-palette, 700);
+
+// The warn palette is optional (defaults to red).
+$t-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$t-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $t-primary,
+      accent: $t-accent,
+      warn: $t-warn,
+    ),
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($t-theme);
+
+
+@font-face {
+    src: url(assets/font/Kanit/Kanit-Regular.ttf) format("truetype");
+    font-family: "Kanit";
+  }
+
+  html,
+  body,.mat-drawer-container {
+    height: 100%;
+    font-family: "Kanit" !important;
+    margin: 0;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    background-color: $accent-color !important;
+  }
+  * {
+    font-family: "Kanit", "arial", sans-serif;
+  }
+  button:focus {
+    outline: none;
+  }
+  *:focus,
+  *:active {
+    outline: none !important;
+  }
+  h1,
+h2,
+h3,
+h4,
+h5,
+p,
+.mat-body,
+.mat-body-1,
+.mat-typography {
+  font-family: "Kanit" !important;
+}
+
+.curser-pointer{
+    cursor: pointer !important;
+}
+.bt-edit{
+  background-color: #FFDE00 !important;
+  color: white !important;
+  }
+.bt-delete{
+  background-color: #DD5353 !important;
+  color: white !important;
+  }
+  .primary-color {
+    color:$primary-color !important;
+    // color: white !important;
+  }
+  .primary-bg {
+    background-color: $primary-color!important;
+    color: $primary-text;
+  }
+  .primary-border {
+    border: 1px solid $primary-color;
+  }
+
+.accent-color {
+  color:$accent-color !important;
+  // color: white !important;
+}
+.accent-bg {
+  background-color: $accent-color!important;
+  color: $accent-text;
+}
+.accent-border {
+  border: 1px solid $accent-color;
+}
+
+
+.white-color{
+  color: white !important;
+}
+.white-bg{
+  background-color: white !important;
+}
+
+.black-color{
+  color: black !important;
+}
+.black-bg{
+  background-color: black !important;
+}
+.cursor-pointer {
+  cursor: pointer;
+}

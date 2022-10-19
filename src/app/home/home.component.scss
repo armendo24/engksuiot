@@ -1,0 +1,13 @@
+#body-home{
+  min-height: 100vh;
+
+  .temp,.humidity{
+    height: 500px;
+    .value-1{
+      font-size: 3rem;
+      sup{
+        font-size: 1rem;
+      }
+    }
+  }
+}
