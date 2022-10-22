@@ -1,35 +1,51 @@
 <mat-sidenav-container class="sidenav-container">
   <!-- [opened]="(isHandset$ | async) === false" -->
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" mode="push" >
-    <mat-toolbar  class="justify-content-center ">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+    <mat-toolbar class="justify-content-center ">
       <img class="logo-1 p-2" src="assets/img/NIA_(Thailand)_Logo_320.png">
       <img class="logo-2" src="assets/img/KSU_LOGO.png">
     </mat-toolbar>
     <mat-divider></mat-divider>
     <mat-nav-list class="p-2 ">
-      <button mat-raised-button color="primary" (click)="drawer.toggle()" [routerLink]="item.path" class="text-l my-1 rounded  w-100"
-        *ngFor="let item of list_item">
+      <button mat-raised-button color="primary" [routerLink]="item.path"
+        class="text-l my-1 rounded  w-100" *ngFor="let item of list_item">
         <mat-icon class="icon-item">{{item.icon}}</mat-icon> {{item.label}}
       </button>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content  class="">
-    <mat-toolbar color="primary">
-      <button mat-icon-button  (click)="drawer.toggle()">
+  <mat-sidenav-content class="">
+    <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center center">
+      <!-- <button mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
         <mat-icon>menu</mat-icon>
-      </button>
+      </button> -->
       <img class="logo-1 p-2" src="assets/img/NIA_(Thailand)_Logo_320.png">
       <img class="logo-2" src="assets/img/KSU_LOGO_WHITE.png">
-      <span class="spacer"></span>
-      <button mat-icon-button class="icon" [routerLink]="item.path" *ngFor="let item of list_item">
+      <!-- <span class="spacer"></span> -->
+      <!-- <button mat-icon-button class="icon" [routerLink]="item.path" *ngFor="let item of list_item" >
         <mat-icon>{{item.icon}}</mat-icon>
-      </button>
+      </button> -->
     </mat-toolbar>
     <br />
     <br />
     <br />
     <router-outlet></router-outlet>
-    <div class="footer"></div>
+
+
+<div *ngIf="isHandset$ | async" id="menu-mobile">
+  <div  class="white-bg"  fxLayout="row" fxLayoutAlign="space-around center">
+    <div *ngFor="let item of list_item" class="item w-100 primary-bg " [routerLink]="item.path" [ngClass]="menu_active_id === item.id ? 'bt-menu-active' : ''" (click)="menu_active_id = item.id">
+      <mat-icon class="text-center mx-auto d-flex">
+        {{item.icon}}
+      </mat-icon>
+    </div>
+  </div>
+</div>
+
+    <div class="footer">
+<br>
+<br>
+<br>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

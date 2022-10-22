@@ -3,13 +3,13 @@
 @import "bootstrap/scss/bootstrap";
 @import 'animate.css';
 @import "~animate.css/animate.css";
-$primary-color : mat.get-color-from-palette(mat.$red-palette, 900);
+$primary-color : mat.get-color-from-palette(mat.$light-blue-palette, 500);
 $primary-text : white;
 
 $accent-color : mat.get-color-from-palette(mat.$blue-gray-palette, 800);
 $accent-text : white;
 
-$t-primary: mat.define-palette(mat.$red-palette, 900);
+$t-primary: mat.define-palette(mat.$light-blue-palette, 500);
 $t-accent: mat.define-palette(mat.$blue-gray-palette, 700);
 
 // The warn palette is optional (defaults to red).
@@ -120,4 +120,10 @@ p,
 }
 .cursor-pointer {
   cursor: pointer;
+}
+
+
+.bt-menu-active{
+  background-color:  white !important;
+  color: $primary-color ;
 }

@@ -1,22 +1,136 @@
 <div id="body-home">
   <br>
-  <br>
   <div class="row container mx-auto">
-    <div class="col">
-      <div class=" temp white-bg rounded shadow">
-        <br>
-        <h2 class="p-2 text-center"><span>อุณหภูมิ</span> <span class="value-1 primary-color"><strong>23</strong><sup><sup>°C</sup></sup></span></h2>
+    <div class="col-12  my-2  p-1">
+      <div class="temp white-bg rounded shadow p-2">
+        <p class="m-0">อุณหภูมิ</p>
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <img class="icon-1" src="assets/img/icon/temperature.png" alt="">
+          <h2 class="mt-3"><span
+              class="primary-color black-color"><strong>{{temp}}</strong><sup><sup>°C</sup></sup></span></h2>
+        </div>
       </div>
-      <br>
-      <div class="chart">
+    </div>
 
+    <div class="col-6  my-2  p-1">
+      <div class=" humidity-air white-bg rounded shadow p-2">
+        <p class="m-0">ความชื้นในอากาศ</p>
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <img class="icon-1" src="assets/img/icon/drop.png" alt="">
+          <h2 class="mt-3"><span
+              class="primary-color black-color"><strong>{{humidity_air}}</strong><sup><sup>%</sup></sup></span></h2>
+        </div>
       </div>
     </div>
-    <div class="col">
-      <div class=" humidity primary-bg rounded shadow">
-        <br>
-        <h2 class="p-2">ความชื้น</h2>
+
+    <div class="col-6  my-2  p-1">
+      <div class="humidity-soil white-bg rounded shadow p-2">
+        <p class="m-0">ความชื้นในดิน</p>
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <img class="icon-1" src="assets/img/icon/drop.png" alt="">
+          <h2 class="mt-3"><span
+              class="primary-color black-color"><strong>{{humidity_soli}}</strong><sup><sup>%</sup></sup></span></h2>
+        </div>
       </div>
     </div>
+
+
+    <div class="col-6  my-2  p-1">
+      <div class=" water_valve1 white-bg rounded shadow p-2">
+        <p class="m-0">วาล์ว 1</p>
+        <div *ngIf="water_valve1;then valve_on else valve_off"></div>
+        <ng-template #valve_on>
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <img class="icon-1" src="assets/img/icon/tap_on.png" alt="">
+            <h2 class="mt-3">
+              <span class="primary-color black-color"><strong>เปิด</strong></span>
+            </h2>
+          </div>
+        </ng-template>
+        <ng-template #valve_off>
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <img class="icon-1" src="assets/img/icon/tap_off.png" alt="">
+            <h2 class="mt-3"><span class="primary-color black-color"><strong>ปิด</strong></span></h2>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+
+
+    <div class="col-6  my-2  p-1">
+      <div class=" water_valve2 white-bg rounded shadow p-2">
+        <p class="m-0">วาล์ว 2</p>
+        <div *ngIf="water_valve2;then valve2_on else valve2_off"></div>
+        <ng-template #valve2_on>
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <img class="icon-1" src="assets/img/icon/tap_on.png" alt="">
+            <h2 class="mt-3">
+              <span class="primary-color black-color"><strong>เปิด</strong></span>
+            </h2>
+          </div>
+        </ng-template>
+        <ng-template #valve2_off>
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <img class="icon-1" src="assets/img/icon/tap_off.png" alt="">
+            <h2 class="mt-3"><span class="primary-color black-color"><strong>ปิด</strong></span></h2>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+    <div class="col-6  my-2  p-1">
+      <div class=" water_valve2 white-bg rounded shadow p-2">
+        <p class="m-0">วาล์ว 3</p>
+        <div *ngIf="water_valve3;then valve3_on else valve3_off"></div>
+        <ng-template #valve3_on>
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <img class="icon-1" src="assets/img/icon/tap_on.png" alt="">
+            <h2 class="mt-3">
+              <span class="primary-color black-color"><strong>เปิด</strong></span>
+            </h2>
+          </div>
+        </ng-template>
+        <ng-template #valve3_off>
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <img class="icon-1" src="assets/img/icon/tap_off.png" alt="">
+            <h2 class="mt-3"><span class="primary-color black-color"><strong>ปิด</strong></span></h2>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+    <div col-6></div>
+
+
+    <div class="col-6  my-2  p-1">
+      <div class=" rain white-bg rounded shadow p-2">
+        <p class="m-0">ฝน</p>
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <img class="icon-1" src="assets/img/icon/water.png" alt="">
+          <h2 class="mt-3 mb-0"><span
+              class="primary-color black-color"><strong>{{rain | number : '1.2-2'}}</strong></span></h2>
+        </div>
+        <h4 class="text-center">มิลิเมตร</h4>
+      </div>
+    </div>
+
+
+    <div class="col-6  my-2  p-1">
+      <div class=" light white-bg rounded shadow p-2">
+        <p class="m-0">แสง</p>
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <img class="icon-1" src="assets/img/icon/sunny.png" alt="">
+          <h2 class="mt-3 mb-0"><span
+              class="primary-color black-color"><strong>{{rain | number : '1.2-2'}}</strong></span></h2>
+        </div>
+        <h4 class="text-center">Lux</h4>
+      </div>
+    </div>
+
+
+    <br>
+    <br>
+    <br>
   </div>
 </div>
