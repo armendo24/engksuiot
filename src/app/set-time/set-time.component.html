@@ -1,278 +1,58 @@
 <div id="body-set-time">
-    <br>
-    <br>
-    <div class=" container mx-auto row">
-        <!-- <div id="water_valve_2" class=" p-3 col-12 col-sm-6 mx-auto" *ngFor="let valve of dataValve | keyvalue">
-            <div class="  rounded white-bg row ">
-                <div class="col-12">
-                    <br>
-                    <h2 class="text-center">
-                        <strong>
-                            วาวล์ว {{ _substring(valve.key) }}
-                        </strong>
-                    </h2>
-                    <mat-divider></mat-divider>
+  <br>
+  <br>
+  <div class=" container mx-auto row">
 
-                    <ng-container *ngFor="let time of [1,2,3] | keyvalue ;let i = index">
-                        {{ getvalue(valve.value,'time_start_'+i)}}
-                  
-                        <div class="col-12 my-3 header-1 ">
-                            <mat-icon class="primary-color">more_time</mat-icon>
-                            <h3 class="m-0">&nbsp;ช่วงเวลาที่ {{i}}</h3>
-                        </div>
-                        <div class="col-6">
-                            เวลาเริ่ม
-                            <timepicker [(ngModel)]="valve.value['time_start_1']"></timepicker>
-                        </div>
-                        <div class="col-6 ">
-                            เวลาสิ้นสุด
-                            <timepicker [(ngModel)]="valve_1_time_end_1"></timepicker>
-                        </div>
-                        <div class="col-12 my-3 ">
-                            <mat-divider></mat-divider>
-                        </div>
-         
-                    </ng-container>
+    <!-- <div style="height: 200px" class="white-bg">
+        <timepicker [ngModel]="obj.valve_1.start"></timepicker>
+      </div> -->
+    <div [id]="'water_valve_'+(i+1)" class=" p-3 col-12 col-sm-6 mx-auto"
+      *ngFor="let valve of dataValve; let i = index">
+      <div class="rounded  w-100 white-bg p-1">
+        <div class="w-100">
+          <br>
+          <!-- <button mat-raised-button (click)="setValue()">setValue</button> -->
+
+          <h1 class="text-center"><strong>วาวล์ว {{ _substring(valve.id) }} </strong>
+          </h1>
 
 
-
-
-
-
-
-                </div>
+          <mat-divider></mat-divider>
+        </div>
+        <div *ngFor="let time of arrayEmpty(3) ;let i2 = index"
+          [ngClass]="valve['status_'+(i2+1)] ? 'white-bg' : 'grey-bg'" class="row m-0 rounded my-2">
+          <div class="col-12 my-3" fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="header-1">
+              <mat-icon class="primary-color">more_time</mat-icon>
+              <h3 class="m-0">&nbsp;ช่วงเวลาที่ {{i2+1}}</h3>
             </div>
-        </div> -->
+            <mat-slide-toggle [(ngModel)]="valve['status_'+(i2+1)]" color="primary"></mat-slide-toggle>
+          </div>
 
-        <div id="water_valve_1" class=" p-3 col-12 col-sm-6 mx-auto">
-            <div class="  rounded white-bg row ">
-                <div class="col-12">
-                    <br>
-                    <h2 class="text-center">
-                        <strong>
-                            วาวล์ว 1
-                        </strong>
-                    </h2>
-                    <mat-divider></mat-divider>
-                </div>
-                <!-- time 1 -->
-                <div class="col-12 my-3 header-1 ">
-                    <mat-icon class="primary-color">more_time</mat-icon>
-                    <h3 class="m-0">&nbsp;ช่วงเวลาที่ 1</h3>
-                </div>
-                <div class="col-6">
-                    เวลาเริ่ม
-                    <timepicker [(ngModel)]="valve_1_time_start_1"></timepicker>
-                </div>
-                <div class="col-6 ">
-                    เวลาสิ้นสุด
-                    <timepicker [(ngModel)]="valve_1_time_end_1"></timepicker>
-                </div>
-                <div class="col-12 my-3 ">
-                    <mat-divider></mat-divider>
-                </div>
-                <!-- time 1 -->
-
-                <!-- time 2 -->
-                <div class="col-12 my-3 header-1 ">
-                    <mat-icon class="primary-color">more_time</mat-icon>
-                    <h3 class="m-0">&nbsp;ช่วงเวลาที่ 2</h3>
-                </div>
-                <div class="col-6">
-                    เวลาเริ่ม
-                    <timepicker [(ngModel)]="valve_1_time_start_2"></timepicker>
-                </div>
-                <div class="col-6 ">
-                    เวลาสิ้นสุด
-                    <timepicker [(ngModel)]="valve_1_time_end_2"></timepicker>
-                </div>
-                <div class="col-12 my-3 ">
-                    <mat-divider></mat-divider>
-                </div>
-                <!-- time 2 -->
-
-                <!-- time 3 -->
-                <div class="col-12 my-3 header-1 ">
-                    <mat-icon class="primary-color">more_time</mat-icon>
-                    <h3 class="m-0">&nbsp;ช่วงเวลาที่ 3</h3>
-                </div>
-                <div class="col-6">
-                    เวลาเริ่ม
-                    <timepicker [(ngModel)]="valve_1_time_start_3"></timepicker>
-                </div>
-                <div class="col-6 ">
-                    เวลาสิ้นสุด
-                    <timepicker [(ngModel)]="valve_1_time_end_3"></timepicker>
-                </div>
-                <div class="col-12 my-3 ">
-                    <mat-divider></mat-divider>
-                </div>
-                <!-- time 3 -->
-                <div class="col-12">
-                    <br>
-                    <button mat-raised-button color="primary" class="w-100" (click)="submit_time_1()">บันทึก วาวล์ว
-                        1</button>
-                    <br>
-                    <br>
-                </div>
-            </div>
+          <div class="col-6 pt-4">
+            เวลาเริ่ม
+            <timepicker [(ngModel)]="valve['start_'+(i2+1)]" [disabled]="!valve['status_'+(i2+1)]"></timepicker>
+          </div>
+          <div class="col-6 pt-4">
+            เวลาสิ้นสุด
+            <timepicker [(ngModel)]="valve['end_'+(i2+1)]" [disabled]="!valve['status_'+(i2+1)]"></timepicker>
+          </div>
+          <div class="col-12 my-3 ">
+            <mat-divider></mat-divider>
+          </div>
         </div>
 
-
-        <div id="water_valve_2" class=" p-3 col-12 col-sm-6 mx-auto">
-            <div class="  rounded white-bg row ">
-                <div class="col-12">
-                    <br>
-                    <h2 class="text-center">
-                        <strong>
-                            วาวล์ว 2
-                        </strong>
-                    </h2>
-                    <mat-divider></mat-divider>
-                </div>
-
-                <!-- time 1 -->
-                <div class="col-12 my-3 header-1 ">
-                    <mat-icon class="primary-color">more_time</mat-icon>
-                    <h3 class="m-0">&nbsp;ช่วงเวลาที่ 1</h3>
-                </div>
-                <div class="col-6">
-                    เวลาเริ่ม
-                    <timepicker [(ngModel)]="valve_2_time_start_1"></timepicker>
-                </div>
-                <div class="col-6 ">
-                    เวลาสิ้นสุด
-                    <timepicker [(ngModel)]="valve_2_time_end_1"></timepicker>
-                </div>
-                <div class="col-12 my-3 ">
-                    <mat-divider></mat-divider>
-                </div>
-                <!-- time 1 -->
-
-                <!-- time 2 -->
-                <div class="col-12 my-3 header-1 ">
-                    <mat-icon class="primary-color">more_time</mat-icon>
-                    <h3 class="m-0">&nbsp;ช่วงเวลาที่ 2</h3>
-                </div>
-                <div class="col-6">
-                    เวลาเริ่ม
-                    <timepicker [(ngModel)]="valve_2_time_start_2"></timepicker>
-                </div>
-                <div class="col-6 ">
-                    เวลาสิ้นสุด
-                    <timepicker [(ngModel)]="valve_2_time_end_2"></timepicker>
-                </div>
-                <div class="col-12 my-3 ">
-                    <mat-divider></mat-divider>
-                </div>
-                <!-- time 2 -->
-
-                <!-- time 2 -->
-                <div class="col-12 my-3 header-1 ">
-                    <mat-icon class="primary-color">more_time</mat-icon>
-                    <h3 class="m-0">&nbsp;ช่วงเวลาที่ 3</h3>
-                </div>
-                <div class="col-6">
-                    เวลาเริ่ม
-                    <timepicker [(ngModel)]="valve_2_time_start_3"></timepicker>
-                </div>
-                <div class="col-6 ">
-                    เวลาสิ้นสุด
-                    <timepicker [(ngModel)]="valve_2_time_end_3"></timepicker>
-                </div>
-                <div class="col-12 my-3 ">
-                    <mat-divider></mat-divider>
-                </div>
-                <!-- time 2 -->
-                <div class="col-12">
-                    <br>
-                    <button mat-raised-button color="primary" class="w-100" (click)="submit_time_1()">บันทึก วาวล์ว
-                        2</button>
-                    <br>
-                    <br>
-                </div>
-            </div>
+        <div class="w-100">
+          <br>
+          <button mat-raised-button color="primary" class="w-100" (click)="submit(valve)">บันทึก วาวล์ว {{i+1}}</button>
+          <br>
+          <br>
         </div>
-
-        <div id="water_valve_3" class=" p-3 col-12 col-sm-6 mx-auto">
-            <div class="  rounded white-bg row ">
-                <div class="col-12">
-                    <br>
-                    <h2 class="text-center">
-                        <strong>
-                            วาวล์ว 3
-                        </strong>
-                    </h2>
-                    <mat-divider></mat-divider>
-                </div>
-
-                <!-- time 1 -->
-                <div class="col-12 my-3 header-1 ">
-                    <mat-icon class="primary-color">more_time</mat-icon>
-                    <h3 class="m-0">&nbsp;ช่วงเวลาที่ 1</h3>
-                </div>
-                <div class="col-6">
-                    เวลาเริ่ม
-                    <timepicker [(ngModel)]="valve_3_time_start_1"></timepicker>
-                </div>
-                <div class="col-6 ">
-                    เวลาสิ้นสุด
-                    <timepicker [(ngModel)]="valve_3_time_end_1"></timepicker>
-                </div>
-                <div class="col-12 my-3 ">
-                    <mat-divider></mat-divider>
-                </div>
-                <!-- time 1 -->
-
-                <!-- time 2 -->
-                <div class="col-12 my-3 header-1 ">
-                    <mat-icon class="primary-color">more_time</mat-icon>
-                    <h3 class="m-0">&nbsp;ช่วงเวลาที่ 2</h3>
-                </div>
-                <div class="col-6">
-                    เวลาเริ่ม
-                    <timepicker [(ngModel)]="valve_3_time_start_2"></timepicker>
-                </div>
-                <div class="col-6 ">
-                    เวลาสิ้นสุด
-                    <timepicker [(ngModel)]="valve_3_time_end_2"></timepicker>
-                </div>
-                <div class="col-12 my-3 ">
-                    <mat-divider></mat-divider>
-                </div>
-                <!-- time 2 -->
-
-                <!-- time 2 -->
-                <div class="col-12 my-3 header-1 ">
-                    <mat-icon class="primary-color">more_time</mat-icon>
-                    <h3 class="m-0">&nbsp;ช่วงเวลาที่ 3</h3>
-                </div>
-                <div class="col-6">
-                    เวลาเริ่ม
-                    <timepicker [(ngModel)]="valve_3_time_start_3"></timepicker>
-                </div>
-                <div class="col-6 ">
-                    เวลาสิ้นสุด
-                    <timepicker [(ngModel)]="valve_3_time_end_3"></timepicker>
-                </div>
-                <div class="col-12 my-3 ">
-                    <mat-divider></mat-divider>
-                </div>
-                <!-- time 2 -->
-                <div class="col-12">
-                    <br>
-                    <button mat-raised-button color="primary" class="w-100" (click)="submit_time_1()">บันทึก วาวล์ว 3</button>
-                    <br>
-                    <br>
-                </div>
-            </div>
-        </div>
-
+      </div>
     </div>
 
-    <br>
-    <br>
-    <br>
+  </div>
+  <br>
 
 
 </div>

@@ -35,81 +35,27 @@
     </div>
 
 
-    <div class="col-6  my-2  p-1">
+    <div class="col-6  my-2  p-1" *ngFor="let valve of dataValve | keyvalue ;let i = index">
       <div class=" water_valve1 white-bg rounded shadow p-2">
-        <p class="m-0">วาล์ว 1</p>
-        <div *ngIf="water_valve1;then valve_on else valve_off"></div>
-        <ng-template #valve_on>
-          <div fxLayout="row" fxLayoutAlign="center center">
-            <img class="icon-1" src="assets/img/icon/tap_on.png" alt="">
-            <h2 class="mt-3">
-              <span class="primary-color black-color"><strong>เปิด</strong></span>
-            </h2>
-          </div>
-        </ng-template>
-        <ng-template #valve_off>
-          <div fxLayout="row" fxLayoutAlign="center center">
-            <img class="icon-1" src="assets/img/icon/tap_off.png" alt="">
-            <h2 class="mt-3"><span class="primary-color black-color"><strong>ปิด</strong></span></h2>
-          </div>
-        </ng-template>
+        <p class="m-0">วาล์ว {{i+1}}</p>
+        <div fxLayout="row" fxLayoutAlign="center center" >
+          <img class="icon-valve" src="assets/img/icon/tap_on.png" alt=""  *ngIf="valve.value">
+          <img class="icon-valve" src="assets/img/icon/tap_off.png" alt=""  *ngIf="!valve.value">
+          <ng-toggle class="shadow" onColor="{{config_toggle.onColor}}" onText="{{config_toggle.onText}}"
+            offColor="{{config_toggle.offColor}}" offText="{{config_toggle.offText}}"
+            [disabled]="config_toggle.disabled" [size]="config_toggle.size" [(ngModel)]="valve.value" (click)="updateValve(valve)" >
+          </ng-toggle>
+        </div>
       </div>
     </div>
-
-
-
-    <div class="col-6  my-2  p-1">
-      <div class=" water_valve2 white-bg rounded shadow p-2">
-        <p class="m-0">วาล์ว 2</p>
-        <div *ngIf="water_valve2;then valve2_on else valve2_off"></div>
-        <ng-template #valve2_on>
-          <div fxLayout="row" fxLayoutAlign="center center">
-            <img class="icon-1" src="assets/img/icon/tap_on.png" alt="">
-            <h2 class="mt-3">
-              <span class="primary-color black-color"><strong>เปิด</strong></span>
-            </h2>
-          </div>
-        </ng-template>
-        <ng-template #valve2_off>
-          <div fxLayout="row" fxLayoutAlign="center center">
-            <img class="icon-1" src="assets/img/icon/tap_off.png" alt="">
-            <h2 class="mt-3"><span class="primary-color black-color"><strong>ปิด</strong></span></h2>
-          </div>
-        </ng-template>
-      </div>
-    </div>
-
-    <div class="col-6  my-2  p-1">
-      <div class=" water_valve2 white-bg rounded shadow p-2">
-        <p class="m-0">วาล์ว 3</p>
-        <div *ngIf="water_valve3;then valve3_on else valve3_off"></div>
-        <ng-template #valve3_on>
-          <div fxLayout="row" fxLayoutAlign="center center">
-            <img class="icon-1" src="assets/img/icon/tap_on.png" alt="">
-            <h2 class="mt-3">
-              <span class="primary-color black-color"><strong>เปิด</strong></span>
-            </h2>
-          </div>
-        </ng-template>
-        <ng-template #valve3_off>
-          <div fxLayout="row" fxLayoutAlign="center center">
-            <img class="icon-1" src="assets/img/icon/tap_off.png" alt="">
-            <h2 class="mt-3"><span class="primary-color black-color"><strong>ปิด</strong></span></h2>
-          </div>
-        </ng-template>
-      </div>
-    </div>
-
-    <div col-6></div>
-
 
     <div class="col-6  my-2  p-1">
       <div class=" rain white-bg rounded shadow p-2">
         <p class="m-0">ฝน</p>
         <div fxLayout="row" fxLayoutAlign="center center">
           <img class="icon-1" src="assets/img/icon/water.png" alt="">
-          <h2 class="mt-3 mb-0"><span
-              class="primary-color black-color"><strong>{{rain | number : '1.2-2'}}</strong></span></h2>
+          <h2 class="mt-3 mb-0"><span class="primary-color black-color"><strong>{{rain | number :
+                '1.2-2'}}</strong></span></h2>
         </div>
         <h4 class="text-center">มิลิเมตร</h4>
       </div>
@@ -121,8 +67,8 @@
         <p class="m-0">แสง</p>
         <div fxLayout="row" fxLayoutAlign="center center">
           <img class="icon-1" src="assets/img/icon/sunny.png" alt="">
-          <h2 class="mt-3 mb-0"><span
-              class="primary-color black-color"><strong>{{rain | number : '1.2-2'}}</strong></span></h2>
+          <h2 class="mt-3 mb-0"><span class="primary-color black-color"><strong>{{rain | number :
+                '1.2-2'}}</strong></span></h2>
         </div>
         <h4 class="text-center">Lux</h4>
       </div>

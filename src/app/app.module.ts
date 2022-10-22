@@ -19,6 +19,11 @@ import { ChartComponent } from './chart/chart.component';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+
+import { CommonModule } from '@angular/common';
+import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import {NgToggleModule} from '@nth-cloud/ng-toggle';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +50,11 @@ import { environment } from '../environments/environment';
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    })
+    }),
+    CommonModule,
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideFirestore(() => getFirestore()),
+    NgToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

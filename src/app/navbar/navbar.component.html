@@ -3,12 +3,13 @@
   <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar class="justify-content-center ">
-      <img class="logo-1 p-2" src="assets/img/NIA_(Thailand)_Logo_320.png">
+      <img class="logo-1 py-2 pl-2" src="assets/img/NIA_(Thailand)_Logo_320.png">
+      <img class="logo-2 p-2" src="assets/img/ENG_LOGO.png">
       <img class="logo-2" src="assets/img/KSU_LOGO.png">
     </mat-toolbar>
     <mat-divider></mat-divider>
     <mat-nav-list class="p-2 ">
-      <button mat-raised-button color="primary" [routerLink]="item.path"
+      <button mat-raised-button color="primary" [routerLink]="item.path" [ngClass]="menu_active_id === item.id ? 'bt-menu-active' : ''" (click)="menu_active_id = item.id"
         class="text-l my-1 rounded  w-100" *ngFor="let item of list_item">
         <mat-icon class="icon-item">{{item.icon}}</mat-icon> {{item.label}}
       </button>
@@ -19,7 +20,8 @@
       <!-- <button mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
         <mat-icon>menu</mat-icon>
       </button> -->
-      <img class="logo-1 p-2" src="assets/img/NIA_(Thailand)_Logo_320.png">
+      <img class="logo-1 py-2 pl-2 " src="assets/img/NIA_(Thailand)_Logo_320.png">
+      <img class="logo-2 p-2" src="assets/img/ENG_LOGO.png">
       <img class="logo-2" src="assets/img/KSU_LOGO_WHITE.png">
       <!-- <span class="spacer"></span> -->
       <!-- <button mat-icon-button class="icon" [routerLink]="item.path" *ngFor="let item of list_item" >

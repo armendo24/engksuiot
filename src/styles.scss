@@ -105,6 +105,13 @@ p,
 }
 
 
+.grey-color{
+  color: rgb(129, 129, 129) !important;
+}
+.grey-bg{
+  background-color: rgb(129, 129, 129) !important;
+}
+
 .white-color{
   color: white !important;
 }
@@ -124,6 +131,6 @@ p,
 
 
 .bt-menu-active{
-  background-color:  white !important;
-  color: $primary-color ;
+  background-color:  rgb(141, 22, 6) !important;
+  color: white !important ;
 }

@@ -22,7 +22,7 @@
       "es2020",
       "dom"
     ],
-    "useUnknownInCatchVariables": false
+    "useUnknownInCatchVariables": false,
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
