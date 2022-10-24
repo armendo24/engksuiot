@@ -60,9 +60,8 @@ export class HomeComponent implements OnInit {
                   var start = obj['start_' + this._substring(key)];
                   var end = obj['end_' + this._substring(key)];
                   if (this.dataNow >= start && this.dataNow <= end) {
-                    this.dataValve[obj.id] =true;
+                    this.dataValve[obj.id] = true;
                   }
-
                 }
               }
             }
@@ -77,12 +76,10 @@ export class HomeComponent implements OnInit {
   }
 
   deCodeHours(val: string) {
-    var h: string = val.substring(0, 2);
-    return h;
+    return val.substring(0, 2);
   }
   deCodeMinutes(val: string) {
-    var m: string = val.substring(3, 5);
-    return m;
+    return val.substring(3, 5);
   }
 
   toDate(h: number, m: number) {
