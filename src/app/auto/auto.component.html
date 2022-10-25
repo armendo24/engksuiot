@@ -1,13 +1,13 @@
 <div id="body-auto" class="p-2">
-    <br>
+  <br>
 
 
 
-    <!-- 
+  <!--
 
         <form [formGroup]="form" (ngSubmit)="submit()">
             <div *ngFor="let _form of form.controls | keyvalue" class="white-bg">
-           
+
             <div [formGroupName]="_form.key">
               <input formControlName="first" placeholder="First name">
               <input formControlName="last" placeholder="Last name">
@@ -16,46 +16,52 @@
                     <button type="submit">Submit</button>
           </form>
        -->
-    <!-- </div> -->
+  <!-- </div> -->
 
 
-    <form [formGroup]="formInput1" (ngSubmit)="submit()" class="form01"
-        class="rounded shadow m-auto p-1 my-3 white-bg row"  *ngFor="let _i of [1,2,3,4,5,6,7,8,9,10]">
-        <h3 class="text-center mt-2"> <strong>คำสั่งชุดที่ {{_i}}</strong></h3>
-        <mat-form-field appearance="fill" class="col-4 col-sm-3">
-            <mat-label>เซ็นเซอร์:</mat-label>
-            <mat-select formControlName="sensorsId">
-                <mat-option [value]="item.id" *ngFor="let item of dataOption1">{{item.label}}</mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field appearance="fill" class="col-4 col-sm-2">
-            <mat-label>ตัวดำเนินการ:</mat-label>
-            <mat-select formControlName="operator">
-                <mat-option [value]="item.id" *ngFor="let item of dataOperator">{{item.label}}</mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field appearance="fill" class="col-4 col-sm-3">
-            <mat-label>ค่า</mat-label>
-            <input type="number" matInput formControlName="value">
-        </mat-form-field>
-        <mat-form-field appearance="fill" class="col-4 col-sm-2">
-            <mat-label>สถาณะ/ให้ทำอะไร:</mat-label>
-            <mat-select formControlName="status" placeholder="เปิด/ปิดอุปกรณ์">
-                <mat-option value="true">เปิด</mat-option>
-                <mat-option value="false">ปิด</mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field appearance="fill" class="col-4 col-sm-2">
-            <mat-label>อุปกรณ์:</mat-label>
-            <mat-select formControlName="device">
-                <mat-option [value]="item.id" *ngFor="let item of dataDevice">{{item.label}}</mat-option>
-            </mat-select>
-        </mat-form-field>
-        <div class="col-12" fxLayout="row" fxLayoutAlign="end start">
-            <button type="submit" mat-raised-button color="primary">บันทึก</button>
-        </div>
-        <div class="col-12">
-            <br>
-        </div>
-    </form>
+  <div *ngFor="let item of dataForm ">
+    {{item}}
+  </div>
+
+  <form class="form01"  class="rounded shadow m-auto p-1 my-3 white-bg row"
+    *ngFor="let item of dataForm; let i = index">
+    <h3 class="text-center mt-2"> <strong>คำสั่งชุดที่ {{_substring(item.id)}}</strong></h3>
+    <mat-form-field appearance="fill" class="col-4 col-sm-3">
+      <mat-label>เซ็นเซอร์:</mat-label>
+      <mat-select   [(value)]="item['sensorsId']">
+        <mat-option [value]="item2.id" *ngFor="let item2 of dataOption1">{{item2.label}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="col-4 col-sm-2">
+      <mat-label>ตัวดำเนินการ:</mat-label>
+      <mat-select   [(value)]="item['operator']">
+        <mat-option [value]="item2.id" *ngFor="let item2 of dataOperator">{{item2.label}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="col-4 col-sm-3">
+      <mat-label>ค่า</mat-label>
+      <input type="number" matInput [(ngModel)]="item['value']">
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="col-4 col-sm-2">
+      <mat-label>สถาณะ/ให้ทำอะไร:</mat-label>
+      <mat-select  placeholder="เปิด/ปิดอุปกรณ์" [(value)]="item['status']">
+        <mat-option [value]="true">เปิด</mat-option>
+        <mat-option [value]="false">ปิด</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="col-4 col-sm-2">
+      <mat-label>อุปกรณ์:</mat-label>
+      <mat-select  [(value)]="item['device']">
+        <mat-option [value]="item2.id" *ngFor="let item2 of dataDevice">{{item2.label}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+    <div class="col-12" fxLayout="row" fxLayoutAlign="end start">
+      <button type="submit" mat-raised-button color="primary" (click)="submit(item)">บันทึก คำสั่งชุดที่ {{_substring(item.id)}}</button>
+    </div>
+    <div class="col-12">
+      <br>
+    </div>
+  </form>
 </div>

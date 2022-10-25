@@ -44,7 +44,7 @@ export class SetTimeComponent implements OnInit {
   }
 
   getDataValve() {
-    this.firebase.getData('/').then((snapshot: any) => {
+    this.firebase.getData('/valve').then((snapshot: any) => {
       var arr: any[] = [];
       if (snapshot.exists()) {
         console.log(snapshot.val());
@@ -120,7 +120,7 @@ export class SetTimeComponent implements OnInit {
     var status = obj['status'];
     for (var key in obj) {
       if (typeof obj[key] == 'object') {
-        objUpdate[obj.id + '/' + key] = this.enCodeTime(obj[key]);
+        objUpdate['valve/'+obj.id + '/' + key] = this.enCodeTime(obj[key]);
         obj[key] = this.enCodeTime(obj[key]);
       } else if (key.substring(0, 6) == 'status') {
         if (key.substring(0, 7) == 'status_') {
@@ -130,10 +130,10 @@ export class SetTimeComponent implements OnInit {
             console.log(key, status);
           }
         }
-        objUpdate[obj.id + '/' + key] = obj[key];
+        objUpdate['valve/'+obj.id + '/' + key] = obj[key];
       }
     }
-    objUpdate[obj.id + '/status'] = status;
+    objUpdate['valve/'+obj.id + '/status'] = status;
     this.firebase.update(objUpdate);
     this._snackBar.open(
       'บันทึกข้อมูล' + ' วาล์ว ' + this._substring(valve.id),

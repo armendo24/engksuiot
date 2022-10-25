@@ -39,6 +39,12 @@ const long utcOffsetInSeconds = 25200;
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP, "pool.ntp.org", utcOffsetInSeconds);
 
+
+int valve_1 = 1;
+int valve_2 = 2;
+int valve_3 = 3;
+int valve_4 = 4;
+
 void setup() {
   Serial.begin(115200);
   WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
@@ -73,39 +79,45 @@ void setup() {
   Firebase.begin(&config, &auth);
   Firebase.reconnectWiFi(true);
   timeClient.begin();
+
+  pinMode(valve_1, OUTPUT);
+  pinMode(valve_2, OUTPUT);
+  pinMode(valve_3, OUTPUT);
+  pinMode(valve_4, OUTPUT);
+  digitalWrite(valve_1, LOW);
+  digitalWrite(valve_2, LOW);
+  digitalWrite(valve_3, LOW);
+  digitalWrite(valve_4, LOW);
+
 }
 
 void loop() {
-  if (Firebase.ready() && signupOK && (millis() - sendDataPrevMillis > 3000 || sendDataPrevMillis == 0)) {
+  if (Firebase.ready() && signupOK && (millis() - sendDataPrevMillis > 1000 || sendDataPrevMillis == 0)) {
     sendDataPrevMillis = millis();
     timeClient.update();
-    valve_1("valve_1");
-    valve_1("valve_2");
-    valve_1("valve_3");
-    valve_1("valve_4");
-    Serial.println(" ########");
+    set_valve(valve_1,"valve_1");
+    set_valve(valve_2,"valve_2");
+    set_valve(valve_3,"valve_3");
+    set_valve(valve_4,"valve_4");
   }
 }
 
 
 
-void valve_1(String id) {
-  if (checkStatus("/" + id + "/status")) {
-    Serial.println(id + " status: เปิด");
-  } else if (checkStatus("/" + id + "/status_1")) {
-    bool s = checkTime("/" + id + "/start_1");
-    Serial.println(id + "/start_1" + s);
-  } else if (checkStatus("/" + id + "/status_2")) {
-    bool s = checkTime("/" + id + "/start_2");
-    Serial.println(id + "/start_2" + s);
-  } else  if (checkStatus("/" + id + "/status_3")) {
-    bool s = checkTime("/" + id + "/start_3");
-    Serial.println(id + "/start_3" + s);
-  } else  if (checkStatus("/" + id + "/status_4")) {
-    bool s = checkTime("/" + id + "/start_4");
-    Serial.println(id + "/start_4" + s);
+void set_valve(int pin , String id) {
+  if (checkStatus("/valve/" + id + "/status")) {
+     digitalWrite(pin, LOW);
+  } else if (checkStatus("/valve/" + id + "/status_1")) {
+    digitalWrite(pin, checkTime("/valve/" + id + "/start_1", "/" + id + "/end_1"));
+  } else if (checkStatus("/valve/" + id + "/status_2")) {
+    digitalWrite(pin, checkTime("/valve/" + id + "/start_2", "/" + id + "/end_2"));
+  } else  if (checkStatus("/valve/" + id + "/status_3")) {
+    digitalWrite(pin, checkTime("/valve/" + id + "/start_3", "/" + id + "/end_3"));
+  } else  if (checkStatus("/valve/" + id + "/status_4")) {
+    digitalWrite(pin, checkTime("/valve/" + id + "/start_4", "/" + id + "/end_4"));
+  } else {
+    digitalWrite(pin, LOW);
   }
-  Serial.println(" ");
 }
 
 bool checkStatus(String id) {
@@ -119,19 +131,24 @@ String getStatus(String id) {
   }
 }
 
-bool checkTime(String id) {
+bool checkTime(String s , String e) {
   int H_Now = timeClient.getHours();
   int M_Now = timeClient.getMinutes();
-  int H_Start = getStatus(id).substring(0, 2).toInt();
-  int M_Start = getStatus(id).substring(3, 5).toInt();
-  int H_End = getStatus(id).substring(0, 2).toInt();
-  int M_End = getStatus(id).substring(3, 5).toInt();
+  int H_Start = getStatus(s).substring(0, 2).toInt();
+  int M_Start = getStatus(s).substring(3, 5).toInt();
+  int H_End = getStatus(e).substring(0, 2).toInt();
+  int M_End = getStatus(e).substring(3, 5).toInt();
 
   if (H_Now > H_Start) {
     if (H_Now < H_End) {
+      Serial.println("##### 1");
       return true;
     } else if (M_Now <= M_End) {
+      Serial.println("##### 2");
       return true;
+    } else {
+      Serial.println("##### 3");
+      return false;
     }
   } else if (H_Now == H_Start) {
     if (M_Now >= M_Start) {
@@ -139,7 +156,11 @@ bool checkTime(String id) {
         return true;
       } else if (M_Now <= M_End) {
         return true;
+      } else {
+        return false;
       }
     }
+  } else {
+    return false;
   }
 }

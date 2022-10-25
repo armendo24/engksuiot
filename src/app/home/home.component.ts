@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
   }
 
   getDataValve() {
-    this.firebase.getData('/').then((snapshot: any) => {
+    this.firebase.getData('/valve').then((snapshot: any) => {
       var arr: any[] = [];
       if (snapshot.exists()) {
         var obj = snapshot.val();
@@ -91,10 +91,10 @@ export class HomeComponent implements OnInit {
 
   updateValve(val: any) {
     var dataUpdate: any = {};
-    dataUpdate[val.key + '/status'] = val.value;
-    dataUpdate[val.key + '/status_1'] = false;
-    dataUpdate[val.key + '/status_2'] = false;
-    dataUpdate[val.key + '/status_3'] = false;
+    dataUpdate['valve/'+val.key + '/status'] = val.value;
+    dataUpdate['valve/'+val.key + '/status_1'] = false;
+    dataUpdate['valve/'+val.key + '/status_2'] = false;
+    dataUpdate['valve/'+val.key + '/status_3'] = false;
     this.firebase.update(dataUpdate);
   }
 
